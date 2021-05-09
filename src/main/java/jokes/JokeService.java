@@ -13,7 +13,7 @@ public class JokeService {
     @Autowired
     private JokeClient jokeClient;
 
-    @Autowired
+    @Autowired                                                                                         
     private JokeRepo jokeRepo;
 
     public void generate() {
@@ -29,7 +29,9 @@ public class JokeService {
             if (jokeRepo.countByJokeId(details.get().getId()) != 0) {
                 continue;
             }
-            this.jokeRepo.save(new JokeDetails(details.get()));
+            final JokeDetails newJoke = new JokeDetails(details.get());
+            newJoke.setCreateTime(ZonedDateTime.now().toEpochSecond());
+            this.jokeRepo.save(newJoke);
             added = true;
         } while (!added && triesCount != 100);
     }
@@ -42,6 +44,14 @@ public class JokeService {
 
     public List<JokeDetails> getAll() {
         return this.jokeRepo.findAll();
+    }
+
+    public List<JokeDetails> findByPunchlineLikeOrSetupLike(final String pattern) {
+        return this.jokeRepo.findByPunchlineLikeOrSetupLike(pattern, pattern);
+    }
+
+    public List<JokeDetails> findBySetupOrPunchline(final String key) {
+        return this.jokeRepo.findBySetupOrPunchline(key, key);
     }
 
     @Scheduled(fixedDelay = 8000)

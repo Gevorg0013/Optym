@@ -26,6 +26,8 @@ public class JokeDetails {
 
     private String punchline;
 
+    private long createTime;
+
     public String getId() {
         return this.id;
     }
@@ -46,6 +48,10 @@ public class JokeDetails {
         return this.punchline;
     }
 
+    public long getCreateTime() {
+        return this.createTime;
+    }
+
     public void setId(final String id) {
         this.id = id;
     }
@@ -64,5 +70,9 @@ public class JokeDetails {
 
     public void setPunchline(final String punchline) {
         this.punchline = punchline;
+    }
+
+    public void setCreateTime(final long createTime) {
+        this.createTime = createTime;
     }
 }
