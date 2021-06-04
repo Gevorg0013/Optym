@@ -54,7 +54,7 @@ public class JokeService {
         return this.jokeRepo.findBySetupOrPunchline(key, key);
     }
 
-    @Scheduled(fixedDelay = 8000)
+    @Scheduled(fixedDelay = 80000)
     public void generateRunReport() {
 
         System.out.println("Scheduler startes execution: " + ZonedDateTime.now());
